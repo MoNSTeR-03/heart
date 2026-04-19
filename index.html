@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>💜 CRAZY HEART • AHMAD → RYOKO 💜</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>💜 TOCA MI CORAZÓN • AHMAD → RYOKO 💜</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -18,13 +19,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Segoe UI', 'Poppins', 'Quicksand', system-ui, sans-serif;
+      font-family: 'Segoe UI', 'Poppins', 'Quicksand', system-ui, -apple-system, sans-serif;
       overflow: hidden;
       position: relative;
-      cursor: pointer;
+      touch-action: manipulation;
     }
 
-    /* floating chaos particles */
+    /* partículas locas */
     .chaos-particle {
       position: absolute;
       font-size: 20px;
@@ -38,44 +39,53 @@
       100% { transform: translateY(-200px) scale(1.5) rotate(360deg); opacity: 0; }
     }
 
-    /* main heart container */
+    /* contenedor del corazón */
     .heart-wrapper {
       position: relative;
       text-align: center;
       z-index: 10;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .crazy-heart {
-      font-size: 320px;
+      font-size: 280px;
       cursor: pointer;
       filter: drop-shadow(0 0 30px #ff3366);
       transition: all 0.05s;
       animation: heartbeatCrazy 1s infinite;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    @media (min-width: 550px) {
+      .crazy-heart { font-size: 320px; }
     }
 
     @keyframes heartbeatCrazy {
       0%, 100% { transform: scale(1); text-shadow: 0 0 20px #ff3366; }
-      50% { transform: scale(1.1); text-shadow: 0 0 60px #ff66ff; }
+      50% { transform: scale(1.08); text-shadow: 0 0 50px #ff66ff; }
     }
 
-    /* tap counter - CRAZY */
+    /* contador de taps - ARRIBA */
     .tap-counter {
       position: fixed;
-      top: 20%;
+      top: 12%;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(0,0,0,0.85);
       backdrop-filter: blur(20px);
-      padding: 20px 40px;
+      padding: 12px 25px;
       border-radius: 80px;
       text-align: center;
       z-index: 50;
-      border: 3px solid #ff66cc;
+      border: 2px solid #ff66cc;
       white-space: nowrap;
     }
 
     .tap-number {
-      font-size: 4rem;
+      font-size: 3rem;
       font-weight: bold;
       color: #ff88dd;
       font-family: monospace;
@@ -84,21 +94,21 @@
 
     .tap-label {
       color: white;
-      font-size: 1rem;
-      letter-spacing: 2px;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
     }
 
-    /* progress bar - crazy style */
+    /* barra de progreso */
     .crazy-progress {
       position: fixed;
-      bottom: 25%;
+      bottom: 22%;
       left: 50%;
       transform: translateX(-50%);
       width: 80%;
-      max-width: 400px;
+      max-width: 350px;
       background: rgba(255,255,255,0.2);
       border-radius: 50px;
-      height: 12px;
+      height: 10px;
       overflow: hidden;
       z-index: 50;
     }
@@ -112,21 +122,24 @@
       box-shadow: 0 0 20px #ff66cc;
     }
 
-    /* floating messages (appear on each tap) */
+    /* mensajes flotantes */
     .floating-message {
       position: fixed;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       font-weight: bold;
       color: #ffe0fc;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(12px);
       padding: 8px 16px;
       border-radius: 50px;
       white-space: nowrap;
       pointer-events: none;
       z-index: 150;
-      animation: messageFloat 2s ease-out forwards;
+      animation: messageFloat 2.2s ease-out forwards;
       border: 1px solid #ff66cc;
+      max-width: 85vw;
+      white-space: normal;
+      text-align: center;
     }
 
     @keyframes messageFloat {
@@ -134,36 +147,29 @@
       100% { transform: translateY(-120px) scale(1); opacity: 0; }
     }
 
-    /* characters */
+    /* personajes */
     .characters {
       position: fixed;
       bottom: 5%;
       width: 100%;
       display: flex;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 15px;
       z-index: 20;
       transition: all 1s ease;
     }
 
     .char {
-      font-size: 75px;
+      font-size: 60px;
       filter: drop-shadow(0 0 15px #ff66aa);
       transition: all 0.5s;
     }
 
-    /* special effect zone */
-    .crazy-effect {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 5;
+    @media (min-width: 550px) {
+      .char { font-size: 75px; }
     }
 
-    /* final explosion panel */
+    /* pantalla final de explosión */
     .final-explosion {
       position: fixed;
       top: 0;
@@ -182,16 +188,18 @@
       pointer-events: none;
       text-align: center;
       padding: 20px;
+      overflow-y: auto;
     }
 
     .final-poem {
       max-width: 550px;
       transform: scale(0.9);
       transition: transform 0.5s;
+      padding: 20px;
     }
 
     .final-poem h1 {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       background: linear-gradient(135deg, #ff99cc, #ff66aa, #ff44ff);
       -webkit-background-clip: text;
       background-clip: text;
@@ -199,70 +207,91 @@
       margin-bottom: 20px;
     }
 
+    @media (min-width: 550px) {
+      .final-poem h1 { font-size: 2.5rem; }
+    }
+
     .final-poem p {
       color: #fff0fc;
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin: 15px 0;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin: 12px 0;
       font-style: italic;
     }
 
+    @media (min-width: 550px) {
+      .final-poem p { font-size: 1.1rem; }
+    }
+
     .kiss-final {
-      font-size: 70px;
+      font-size: 55px;
       margin: 20px;
       animation: kissCrazy 0.8s infinite;
     }
 
     @keyframes kissCrazy {
       0%, 100% { transform: scale(1); text-shadow: 0 0 10px #ff66aa; }
-      50% { transform: scale(1.3) rotate(10deg); text-shadow: 0 0 40px #ff44cc; }
+      50% { transform: scale(1.2) rotate(5deg); text-shadow: 0 0 30px #ff44cc; }
     }
 
     .reset-btn {
       background: linear-gradient(135deg, #ff66cc, #ff44aa);
       border: none;
-      padding: 12px 30px;
+      padding: 12px 25px;
       border-radius: 50px;
       color: white;
-      font-size: 1rem;
-      margin-top: 30px;
+      font-size: 0.9rem;
+      margin-top: 25px;
       cursor: pointer;
       transition: 0.2s;
+      font-weight: bold;
     }
 
+    .reset-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* instrucción */
     .instruction {
       position: fixed;
-      top: 15px;
+      top: 12px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.75);
       backdrop-filter: blur(10px);
-      padding: 8px 20px;
+      padding: 6px 16px;
       border-radius: 50px;
       color: #ffccf0;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       white-space: nowrap;
       z-index: 40;
       animation: blink 1s infinite;
+      text-align: center;
     }
 
     @keyframes blink {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+      50% { opacity: 0.6; }
     }
 
-    @media (max-width: 550px) {
-      .crazy-heart { font-size: 250px; }
-      .tap-number { font-size: 2.5rem; }
-      .tap-counter { padding: 12px 25px; top: 15%; }
-      .char { font-size: 55px; }
-      .final-poem p { font-size: 0.9rem; }
+    /* ajustes para pantallas pequeñas */
+    @media (max-width: 480px) {
+      .crazy-heart { font-size: 220px; }
+      .tap-counter { top: 10%; padding: 8px 20px; }
+      .tap-number { font-size: 2.2rem; }
+      .tap-label { font-size: 0.7rem; }
+      .crazy-progress { bottom: 18%; }
+      .instruction { font-size: 0.6rem; top: 8px; white-space: normal; width: 90%; text-align: center; }
+      .char { font-size: 50px; }
+      .final-poem h1 { font-size: 1.5rem; }
+      .final-poem p { font-size: 0.85rem; }
+      .kiss-final { font-size: 45px; }
     }
   </style>
 </head>
 <body>
 
-<div class="instruction">🔥 RYOKO... TOCA MI CORAZÓN COMO LOCA 🔥 CADA TAP = UN SECRETO 💜</div>
+<div class="instruction">🔥 RYOKO... ¡TOCA MI CORAZÓN COMO LOCA! 🔥 CADA TAP = UN SECRETO DE AMOR 💜</div>
 
 <div class="tap-counter">
   <div class="tap-number" id="tapCountDisplay">0</div>
@@ -282,8 +311,6 @@
   <div class="char" id="ryokoChar">👩🌸</div>
 </div>
 
-<div class="crazy-effect" id="crazyEffect"></div>
-
 <div class="final-explosion" id="finalExplosion">
   <div class="final-poem">
     <h1>💜 RYOKO... LO LOGRASTE 💜</h1>
@@ -293,14 +320,14 @@
     <p><strong>Eres mi corazón, mi caos, mi calma y mi locura favorita.</strong></p>
     <p><strong>Te amo, Ryoko. Ahmad siempre será tuyo. 💜</strong></p>
     <div class="kiss-final" id="finalKissAnimate">💋 AHMAD → RYOKO 💋</div>
-    <button class="reset-btn" id="resetBtn">🌸 VOLVER A TOCAR 🌸</button>
+    <button class="reset-btn" id="resetBtn">🌸 VOLVER A EMPEZAR 🌸</button>
   </div>
 </div>
 
 <script>
-  // ========== CRAZY ROMANTIC SECRETS (100+ possible messages) ==========
+  // ========== MENSAJES SECRETOS ROMÁNTICOS EN ESPAÑOL ==========
   const secretMessages = [
-    "💜 TOCASTE MI CORAZÓN... ahora es tuyo",
+    "💜 Tocaste mi corazón... ahora es tuyo",
     "🌸 Ryoko, cada latido tiene tu nombre",
     "💋 Quiero besarte hasta que el sol se canse",
     "🔥 Eres mi incendio favorito",
@@ -339,7 +366,12 @@
     "💜 TE AMO EN MAYÚSCULAS",
     "🌸 Eres mi primavera favorita",
     "🔥 Cada tap es una promesa de amarte",
-    "💋 Este corazón es un museo... y tú eres la única obra"
+    "💋 Este corazón es un museo... y tú eres la única obra",
+    "✨ Ahmad te ama más de lo que imaginas",
+    "💜 100% tuyo, siempre",
+    "🌸 Tú hiciste que mi corazón vuelva a latir",
+    "🔥 Eres mi razón favorita para sonreír",
+    "💋 Tus ojos son mi droga favorita"
   ];
 
   let tapCount = 0;
@@ -352,9 +384,8 @@
   const ahmadChar = document.getElementById('ahmadChar');
   const ryokoChar = document.getElementById('ryokoChar');
   const finalExplosion = document.getElementById('finalExplosion');
-  const crazyEffect = document.getElementById('crazyEffect');
 
-  // update UI
+  // actualizar interfaz
   function updateUI() {
     tapDisplay.innerText = tapCount;
     const percent = (tapCount / TARGET_TAPS) * 100;
@@ -365,34 +396,34 @@
     }
   }
 
-  // create floating message on tap
+  // mostrar mensaje flotante en posición del tap
   function showFloatingMessage(x, y) {
     const randomMsg = secretMessages[Math.floor(Math.random() * secretMessages.length)];
     const msgDiv = document.createElement('div');
     msgDiv.className = 'floating-message';
     msgDiv.innerText = randomMsg;
-    msgDiv.style.left = (x - 60) + 'px';
-    msgDiv.style.top = (y - 40) + 'px';
+    msgDiv.style.left = (x - 70) + 'px';
+    msgDiv.style.top = (y - 50) + 'px';
     document.body.appendChild(msgDiv);
-    setTimeout(() => msgDiv.remove(), 2000);
+    setTimeout(() => msgDiv.remove(), 2200);
   }
 
-  // chaos particles on tap
+  // crear partículas de caos
   function createChaosParticles(x, y) {
     for (let i = 0; i < 12; i++) {
       const particle = document.createElement('div');
       particle.className = 'chaos-particle';
       const icons = ['💜', '💋', '🔥', '🌸', '⭐', '💕', '😘', '✨'];
       particle.innerText = icons[Math.floor(Math.random() * icons.length)];
-      particle.style.left = (x - 20 + Math.random() * 40) + 'px';
-      particle.style.top = (y - 20 + Math.random() * 40) + 'px';
+      particle.style.left = (x - 25 + Math.random() * 50) + 'px';
+      particle.style.top = (y - 25 + Math.random() * 50) + 'px';
       particle.style.fontSize = (18 + Math.random() * 25) + 'px';
       document.body.appendChild(particle);
       setTimeout(() => particle.remove(), 2500);
     }
   }
 
-  // screen shake effect (crazy!)
+  // efecto de vibración de pantalla
   function shakeScreen() {
     document.body.style.transform = 'translate(2px, 1px)';
     setTimeout(() => { document.body.style.transform = 'translate(-1px, -2px)'; }, 30);
@@ -400,7 +431,7 @@
     setTimeout(() => { document.body.style.transform = 'translate(0, 0)'; }, 90);
   }
 
-  // burst hearts from center
+  // explosión de corazones desde el centro
   function burstHeartsFromHeart() {
     const heartRect = heart.getBoundingClientRect();
     const centerX = heartRect.left + heartRect.width / 2;
@@ -421,97 +452,130 @@
     }
   }
 
-  // handle tap on heart
-  heart.addEventListener('click', (e) => {
-    if (finaleTriggered) return;
-    
-    e.stopPropagation();
-    const rect = heart.getBoundingClientRect();
-    const clickX = e.clientX;
-    const clickY = e.clientY;
-    
-    tapCount++;
-    updateUI();
-    
-    // show message at click position
-    showFloatingMessage(clickX, clickY);
-    createChaosParticles(clickX, clickY);
-    shakeScreen();
-    
-    // change heart scale briefly
-    heart.style.transform = 'scale(0.95)';
-    setTimeout(() => { heart.style.transform = 'scale(1)'; }, 80);
-    
-    if (navigator.vibrate) navigator.vibrate(30);
-    
-    // special effect on every 10 taps
-    if (tapCount % 10 === 0 && tapCount < TARGET_TAPS) {
-      burstHeartsFromHeart();
-      const bigMsg = document.createElement('div');
-      bigMsg.className = 'floating-message';
-      bigMsg.innerText = `🔥 ${tapCount} TAPS! SIGUE ASÍ RYOKO 🔥`;
-      bigMsg.style.left = '50%';
-      bigMsg.style.top = '40%';
-      bigMsg.style.transform = 'translateX(-50%)';
-      bigMsg.style.fontSize = '1.3rem';
-      bigMsg.style.whiteSpace = 'nowrap';
-      document.body.appendChild(bigMsg);
-      setTimeout(() => bigMsg.remove(), 1500);
-    }
-    
-    // when close to target
-    if (tapCount === TARGET_TAPS - 5) {
-      showSpecialMessage("🔥 5 TAPS MÁS Y MI CORAZÓN EXPLOTA DE AMOR 🔥");
-    }
-  });
-
+  // mensaje especial grande
   function showSpecialMessage(msg) {
     const special = document.createElement('div');
     special.className = 'floating-message';
     special.innerText = msg;
     special.style.left = '50%';
-    special.style.top = '50%';
+    special.style.top = '45%';
     special.style.transform = 'translateX(-50%)';
-    special.style.fontSize = '1.2rem';
+    special.style.fontSize = '1rem';
     special.style.background = 'rgba(255,50,100,0.9)';
     special.style.whiteSpace = 'normal';
-    special.style.maxWidth = '80vw';
+    special.style.maxWidth = '85vw';
     special.style.textAlign = 'center';
     document.body.appendChild(special);
     setTimeout(() => special.remove(), 2500);
   }
 
-  // CRAZY FINALE
+  // MANEJAR TAP EN EL CORAZÓN
+  heart.addEventListener('click', (e) => {
+    if (finaleTriggered) return;
+    
+    e.stopPropagation();
+    const rect = heart.getBoundingClientRect();
+    let clickX, clickY;
+    
+    if (e.touches) {
+      clickX = e.touches[0].clientX;
+      clickY = e.touches[0].clientY;
+    } else {
+      clickX = e.clientX;
+      clickY = e.clientY;
+    }
+    
+    // usar las coordenadas del evento
+    const clientX = e.clientX || (e.touches ? e.touches[0].clientX : rect.left + rect.width/2);
+    const clientY = e.clientY || (e.touches ? e.touches[0].clientY : rect.top + rect.height/2);
+    
+    tapCount++;
+    updateUI();
+    
+    showFloatingMessage(clientX, clientY);
+    createChaosParticles(clientX, clientY);
+    shakeScreen();
+    
+    // animación del corazón
+    heart.style.transform = 'scale(0.95)';
+    setTimeout(() => { heart.style.transform = 'scale(1)'; }, 80);
+    
+    if (navigator.vibrate) navigator.vibrate(30);
+    
+    // efectos especiales cada 10 taps
+    if (tapCount % 10 === 0 && tapCount < TARGET_TAPS) {
+      burstHeartsFromHeart();
+      showSpecialMessage(`🔥 ¡${tapCount} TAPS! ¡SIGUE ASÍ RYOKO! 🔥`);
+    }
+    
+    // cuando se acerca al final
+    if (tapCount === TARGET_TAPS - 5) {
+      showSpecialMessage("🔥 ¡5 TAPS MÁS Y MI CORAZÓN EXPLOTA DE AMOR! 🔥");
+    }
+  });
+
+  // soporte para dispositivos táctiles
+  heart.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    if (finaleTriggered) return;
+    
+    const touch = e.touches[0];
+    const clientX = touch.clientX;
+    const clientY = touch.clientY;
+    
+    tapCount++;
+    updateUI();
+    
+    showFloatingMessage(clientX, clientY);
+    createChaosParticles(clientX, clientY);
+    shakeScreen();
+    
+    heart.style.transform = 'scale(0.95)';
+    setTimeout(() => { heart.style.transform = 'scale(1)'; }, 80);
+    
+    if (navigator.vibrate) navigator.vibrate(30);
+    
+    if (tapCount % 10 === 0 && tapCount < TARGET_TAPS) {
+      burstHeartsFromHeart();
+      showSpecialMessage(`🔥 ¡${tapCount} TAPS! ¡SIGUE ASÍ RYOKO! 🔥`);
+    }
+    
+    if (tapCount === TARGET_TAPS - 5) {
+      showSpecialMessage("🔥 ¡5 TAPS MÁS Y MI CORAZÓN EXPLOTA DE AMOR! 🔥");
+    }
+  });
+
+  // FINAL ÉPICO
   function startCrazyFinale() {
     finaleTriggered = true;
     
-    // massive explosion of hearts
-    for (let i = 0; i < 100; i++) {
+    // explosión masiva de corazones
+    for (let i = 0; i < 120; i++) {
       setTimeout(() => {
         const explosionHeart = document.createElement('div');
         explosionHeart.className = 'chaos-particle';
         explosionHeart.innerText = ['💜', '💋', '🔥', '🌸', '⭐', '💕'][Math.floor(Math.random() * 6)];
         explosionHeart.style.left = Math.random() * 100 + '%';
         explosionHeart.style.top = Math.random() * 100 + '%';
-        explosionHeart.style.fontSize = (25 + Math.random() * 40) + 'px';
+        explosionHeart.style.fontSize = (25 + Math.random() * 45) + 'px';
         explosionHeart.style.animation = `chaosFloat ${2 + Math.random() * 2}s ease-out forwards`;
         document.body.appendChild(explosionHeart);
         setTimeout(() => explosionHeart.remove(), 2500);
-      }, i * 20);
+      }, i * 15);
     }
     
-    // animate characters to center
+    // animar personajes al centro
     ahmadChar.style.transition = 'all 1.5s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
     ryokoChar.style.transition = 'all 1.5s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
-    ahmadChar.style.transform = 'translateX(calc(50vw - 100px))';
-    ryokoChar.style.transform = 'translateX(calc(-50vw + 100px))';
+    ahmadChar.style.transform = 'translateX(calc(50vw - 80px))';
+    ryokoChar.style.transform = 'translateX(calc(-50vw + 80px))';
     
-    // change heart to glowing
+    // cambiar brillo del corazón
     heart.style.animation = 'none';
     heart.style.filter = 'drop-shadow(0 0 80px #ff44ff)';
     
     setTimeout(() => {
-      // kiss!
+      // ¡BESO!
       ahmadChar.innerHTML = '😘💜 AHMAD';
       ryokoChar.innerHTML = '😘🌸 RYOKO';
       
@@ -531,11 +595,9 @@
       
       setTimeout(() => {
         kissOverlay.remove();
-        // show final poem
         finalExplosion.style.opacity = '1';
         finalExplosion.style.pointerEvents = 'auto';
         
-        // animate final kiss in poem
         const finalKiss = document.getElementById('finalKissAnimate');
         setInterval(() => {
           if (finalExplosion.style.opacity === '1') {
@@ -547,19 +609,19 @@
     }, 1500);
   }
 
-  // reset button
+  // botón de reinicio
   document.getElementById('resetBtn').addEventListener('click', () => {
     location.reload();
   });
 
-  // initial message
+  // mensaje inicial
   setTimeout(() => {
     if (!finaleTriggered) {
-      showSpecialMessage("💜 TOCA EL CORAZÓN, RYOKO... CADA TAP ES UN SECRETO DE AMOR 💜");
+      showSpecialMessage("💜 TOCA EL CORAZÓN, RYOKO... ¡CADA TAP ES UN SECRETO DE AMOR! 💜");
     }
   }, 1000);
 
-  // create background sparkles
+  // fondos con brillos
   for (let i = 0; i < 80; i++) {
     let spark = document.createElement('div');
     spark.style.position = 'absolute';
@@ -578,7 +640,7 @@
   style.textContent = `
     @keyframes twinkle {
       0%, 100% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 1; transform: scale(1.5); box-shadow: 0 0 10px #ff66cc; }
+      50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px #ff66cc; }
     }
   `;
   document.head.appendChild(style);
