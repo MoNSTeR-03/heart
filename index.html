@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>💜 Inside Ahmad's Heart • For Ryoko 💜</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #1a0b2e 0%, #0d041c 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', 'Poppins', 'Quicksand', system-ui, sans-serif;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    /* floating particles background */
+    .bg-particle {
+      position: absolute;
+      color: #ff66cc;
+      opacity: 0.3;
+      pointer-events: none;
+      animation: floatBg 8s linear infinite;
+      font-size: 12px;
+    }
+
+    @keyframes floatBg {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.3; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    /* main container */
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      height: 100vh;
+      max-height: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    /* heart container */
+    .heart-container {
+      position: relative;
+      cursor: pointer;
+      animation: heartbeat 1.5s ease-in-out infinite;
+      transition: all 0.3s;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    .big-heart {
+      font-size: 220px;
+      filter: drop-shadow(0 0 30px #ff3366);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    /* clickable zones on heart */
+    .heart-zone {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: radial-gradient(circle, rgba(255,100,200,0.4) 0%, rgba(255,100,200,0) 70%);
+      animation: pulse 2s infinite;
+    }
+
+    .heart-zone:hover {
+      transform: scale(1.2);
+      background: radial-gradient(circle, rgba(255,150,220,0.6) 0%, rgba(255,100,200,0) 70%);
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.6; transform: scale(0.9);}
+      100% { opacity: 1; transform: scale(1.2);}
+    }
+
+    /* zone positions */
+    .zone1 { top: 20%; left: 35%; }
+    .zone2 { top: 20%; right: 35%; }
+    .zone3 { top: 45%; left: 20%; }
+    .zone4 { top: 45%; right: 20%; }
+    .zone5 { bottom: 30%; left: 38%; }
+    .zone6 { bottom: 30%; right: 38%; }
+    .zone7 { top: 60%; left: 45%; }
+
+    /* message popup */
+    .message-popup {
+      position: fixed;
+      bottom: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(20px);
+      padding: 16px 28px;
+      border-radius: 60px;
+      font-size: 1.1rem;
+      color: #ffe0fc;
+      text-align: center;
+      max-width: 85vw;
+      z-index: 200;
+      border: 1px solid #ff66cc;
+      font-family: monospace;
+      transition: opacity 0.4s;
+      opacity: 0;
+      pointer-events: none;
+      white-space: normal;
+      line-height: 1.4;
+    }
+
+    /* counter */
+    .counter {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      color: #ff99dd;
+      background: rgba(0,0,0,0.5);
+      padding: 6px 15px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-family: monospace;
+      z-index: 50;
+      backdrop-filter: blur(5px);
+    }
+
+    /* characters */
+    .characters {
+      position: fixed;
+      bottom: 8%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 30px;
+      z-index: 20;
+      transition: all 1s ease;
+    }
+
+    .char {
+      font-size: 70px;
+      filter: drop-shadow(0 0 15px #ff66aa);
+      transition: all 0.5s;
+    }
+
+    #ahmad-char {
+      transform: translateX(0);
+    }
+
+    #ryoko-char {
+      transform: translateX(0);
+    }
+
+    /* final poem container */
+    .poem-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(20px);
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+      pointer-events: none;
+      padding: 30px;
+    }
+
+    .poem-content {
+      max-width: 500px;
+      text-align: center;
+      color: #fff0fc;
+      font-family: 'Quicksand', serif;
+      transform: scale(0.9);
+      transition: transform 0.5s;
+    }
+
+    .poem-content h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ff99cc, #ff66aa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .poem-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin: 15px 0;
+      font-style: italic;
+    }
+
+    .poem-content .kiss {
+      margin-top: 30px;
+      font-size: 50px;
+      animation: kissPulse 1s infinite;
+    }
+
+    @keyframes kissPulse {
+      0%, 100% { transform: scale(1); text-shadow: 0 0 10px #ff66aa; }
+      50% { transform: scale(1.2); text-shadow: 0 0 30px #ff44cc; }
+    }
+
+    .close-poem {
+      margin-top: 30px;
+      background: rgba(255,102,204,0.3);
+      border: 1px solid #ff66cc;
+      padding: 10px 30px;
+      border-radius: 50px;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .close-poem:hover {
+      background: #ff66cc;
+      transform: scale(1.05);
+    }
+
+    /* instruction */
+    .instruction {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      padding: 8px 20px;
+      border-radius: 50px;
+      color: #ffccf0;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      z-index: 40;
+      pointer-events: none;
+    }
+
+    @media (max-width: 550px) {
+      .big-heart { font-size: 180px; }
+      .heart-zone { width: 45px; height: 45px; }
+      .char { font-size: 55px; }
+      .message-popup { font-size: 0.9rem; bottom: 25%; }
+      .poem-content p { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="instruction">💜 Ryoko... touch my heart. Discover what's inside 💜</div>
+<div class="counter" id="counter">💖 0 / 7 secrets unlocked</div>
+<div class="message-popup" id="messagePopup"></div>
+
+<div class="container">
+  <div class="heart-container">
+    <div class="big-heart">❤️</div>
+    <div class="heart-zone zone1" data-zone="1"></div>
+    <div class="heart-zone zone2" data-zone="2"></div>
+    <div class="heart-zone zone3" data-zone="3"></div>
+    <div class="heart-zone zone4" data-zone="4"></div>
+    <div class="heart-zone zone5" data-zone="5"></div>
+    <div class="heart-zone zone6" data-zone="6"></div>
+    <div class="heart-zone zone7" data-zone="7"></div>
+  </div>
+</div>
+
+<div class="characters">
+  <div class="char" id="ahmad-char">🧑‍🦱💜</div>
+  <div class="char" id="ryoko-char">👩🌸</div>
+</div>
+
+<div class="poem-overlay" id="poemOverlay">
+  <div class="poem-content">
+    <h1>💜 Para Ryoko 💜</h1>
+    <p>En medio del ruido del mundo,<br>tu voz fue mi primer silencio perfecto.</p>
+    <p>Tus ojos no solo miran,<br>encuentran las partes de mí que ni yo conocía.</p>
+    <p>Ryoko, cada latido de mi corazón<br>tiene tu nombre escrito en llamas suaves.</p>
+    <p>No sé si merezco tanto brillo,<br>pero juro cuidar tu luz como si fuera mía.</p>
+    <p>Porque lo es.<br>Tú eres mía. Y yo soy completamente tuyo.</p>
+    <p><strong>Te amo, Ryoko. En esta vida y en todas las que siguen.</strong></p>
+    <div class="kiss" id="kissAnimation">💋💜💋</div>
+    <div class="close-poem" id="closePoem">🌸 Volver a empezar 🌸</div>
+  </div>
+</div>
+
+<script>
+  // Heart secrets data
+  const secrets = {
+    1: "✨ El primer día que vi tu sonrisa, supe que mi corazón ya no me pertenecía. Es tuyo, Ryoko.",
+    2: "🌙 Cuando duermo y sueño, siempre apareces tú. Eres mi sueño favorito y mi realidad preferida.",
+    3: "🎵 Tu risa es la canción que mi alma tararea cuando te extraño. La escucho todo el tiempo.",
+    4: "🌸 Guardé un recuerdo de cada momento contigo. En mi corazón hay un jardín solo para ti.",
+    5: "💜 Ahmad tiene miedo a muchas cosas... pero nunca de amarte. Eres mi valentía.",
+    6: "⭐ A veces miro las estrellas y pienso: 'Una de ellas brilla menos que Ryoko'. Todas pierden.",
+    7: "💋 El mejor lugar del mundo no es París ni la playa... es justo donde estás tú, Ryoko."
+  };
+
+  let unlockedZones = new Set();
+  let totalZones = 7;
+  let endingTriggered = false;
+
+  const popup = document.getElementById('messagePopup');
+  const counterDiv = document.getElementById('counter');
+  const ahmadChar = document.getElementById('ahmad-char');
+  const ryokoChar = document.getElementById('ryoko-char');
+  const poemOverlay = document.getElementById('poemOverlay');
+  const heartContainer = document.querySelector('.heart-container');
+
+  function showMessage(text, isSecret = true) {
+    popup.innerText = text;
+    popup.style.opacity = "1";
+    setTimeout(() => {
+      popup.style.opacity = "0";
+    }, 4000);
+  }
+
+  function updateCounter() {
+    counterDiv.innerHTML = `💖 ${unlockedZones.size} / ${totalZones} secrets unlocked`;
+    if (unlockedZones.size === totalZones && !endingTriggered) {
+      startFinale();
+    }
+  }
+
+  // create floating background hearts
+  function createBackgroundParticles() {
+    for (let i = 0; i < 50; i++) {
+      let particle = document.createElement('div');
+      particle.className = 'bg-particle';
+      particle.innerHTML = ['💜', '🌸', '💕', '✨', '🦋'][Math.floor(Math.random() * 5)];
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.fontSize = (10 + Math.random() * 20) + 'px';
+      particle.style.animationDuration = (4 + Math.random() * 8) + 's';
+      particle.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(particle);
+    }
+  }
+
+  // burst effect when unlocking a secret
+  function burstHearts(x, y) {
+    for (let i = 0; i < 12; i++) {
+      let heart = document.createElement('div');
+      heart.innerHTML = ['💜', '💖', '💗', '🌸', '✨'][Math.floor(Math.random() * 5)];
+      heart.style.position = 'fixed';
+      heart.style.left = (x - 30 + Math.random() * 60) + 'px';
+      heart.style.top = (y - 30 + Math.random() * 60) + 'px';
+      heart.style.fontSize = (16 + Math.random() * 20) + 'px';
+      heart.style.pointerEvents = 'none';
+      heart.style.zIndex = '100';
+      heart.style.animation = 'floatUp 2s ease-out forwards';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
+    }
+  }
+
+  // add keyframes for floating hearts
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.5); opacity: 1; }
+      100% { transform: translateY(-150px) scale(1.2); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // handle zone clicks
+  document.querySelectorAll('.heart-zone').forEach(zone => {
+    zone.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (endingTriggered) return;
+      
+      const zoneId = zone.dataset.zone;
+      if (unlockedZones.has(zoneId)) {
+        showMessage("💜 Ya descubriste este secreto... pero sigue latiendo por ti 💜", false);
+        return;
+      }
+      
+      unlockedZones.add(zoneId);
+      const rect = zone.getBoundingClientRect();
+      burstHearts(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      
+      // change zone appearance
+      zone.style.background = 'radial-gradient(circle, rgba(255,200,230,0.8) 0%, rgba(255,100,200,0.4) 70%)';
+      zone.style.animation = 'none';
+      
+      showMessage(secrets[zoneId]);
+      updateCounter();
+      
+      if (navigator.vibrate) navigator.vibrate(50);
+    });
+  });
+
+  // GRAND FINALE: characters kiss + poem
+  function startFinale() {
+    endingTriggered = true;
+    
+    // stop heartbeat animation
+    document.querySelector('.heart-container').style.animation = 'none';
+    
+    // animate characters moving to center
+    ahmadChar.style.transition = 'all 1.5s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
+    ryokoChar.style.transition = 'all 1.5s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
+    
+    ahmadChar.style.transform = 'translateX(calc(50vw - 80px))';
+    ryokoChar.style.transform = 'translateX(calc(-50vw + 80px))';
+    
+    // change heart to glowing
+    const bigHeart = document.querySelector('.big-heart');
+    bigHeart.style.filter = 'drop-shadow(0 0 50px #ff44aa)';
+    
+    setTimeout(() => {
+      // kiss animation on characters
+      ahmadChar.innerHTML = '😘💜';
+      ryokoChar.innerHTML = '😘🌸';
+      
+      // create kiss effect
+      const kissEffect = document.createElement('div');
+      kissEffect.innerHTML = '💋💜💋';
+      kissEffect.style.position = 'fixed';
+      kissEffect.style.top = '60%';
+      kissEffect.style.left = '50%';
+      kissEffect.style.transform = 'translate(-50%, -50%)';
+      kissEffect.style.fontSize = '70px';
+      kissEffect.style.zIndex = '150';
+      kissEffect.style.pointerEvents = 'none';
+      kissEffect.style.animation = 'kissPulse 1s ease-in-out 3';
+      document.body.appendChild(kissEffect);
+      
+      if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+      
+      setTimeout(() => kissEffect.remove(), 2000);
+      
+      // show poem after kiss
+      setTimeout(() => {
+        poemOverlay.style.opacity = '1';
+        poemOverlay.style.pointerEvents = 'auto';
+        document.querySelector('.poem-content').style.transform = 'scale(1)';
+        
+        // animate kiss in poem
+        const kissDiv = document.getElementById('kissAnimation');
+        setInterval(() => {
+          if (poemOverlay.style.opacity === '1') {
+            kissDiv.style.transform = 'scale(1.1)';
+            setTimeout(() => { kissDiv.style.transform = 'scale(1)'; }, 500);
+          }
+        }, 1500);
+      }, 800);
+    }, 1500);
+  }
+
+  // close poem and reset (optional)
+  document.getElementById('closePoem').addEventListener('click', () => {
+    poemOverlay.style.opacity = '0';
+    poemOverlay.style.pointerEvents = 'none';
+    // optional: reset the game
+    location.reload();
+  });
+
+  // initial heart pulse instruction
+  setTimeout(() => {
+    if (!endingTriggered) {
+      showMessage("💜 Toca mi corazón... cada parte guarda un secreto para ti, Ryoko 💜", false);
+    }
+  }, 1500);
+
+  createBackgroundParticles();
+
+  // add floating sparkles
+  for (let i = 0; i < 30; i++) {
+    let spark = document.createElement('div');
+    spark.style.position = 'absolute';
+    spark.style.width = '3px';
+    spark.style.height = '3px';
+    spark.style.background = '#ff99ee';
+    spark.style.borderRadius = '50%';
+    spark.style.left = Math.random() * 100 + '%';
+    spark.style.top = Math.random() * 100 + '%';
+    spark.style.animation = `twinkle ${1 + Math.random() * 2}s infinite`;
+    document.body.appendChild(spark);
+  }
+
+  const twinkleStyle = document.createElement('style');
+  twinkleStyle.textContent = `
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px #ff66cc; }
+    }
+  `;
+  document.head.appendChild(twinkleStyle);
+</script>
+</body>
+</html>
