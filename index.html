@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>💜 UNLOCK AHMAD'S HEART • For Ryoko 💜</title>
+  <title>💜 CRAZY HEART • AHMAD → RYOKO 💜</title>
   <style>
     * {
       margin: 0;
@@ -14,7 +14,7 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(145deg, #1a0b2e 0%, #0d041c 100%);
+      background: radial-gradient(ellipse at center, #1a0b2e 0%, #0d041c 100%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -24,196 +24,114 @@
       cursor: pointer;
     }
 
-    /* floating particles */
-    .bg-particle {
+    /* floating chaos particles */
+    .chaos-particle {
       position: absolute;
-      color: #ff66cc;
-      opacity: 0.3;
+      font-size: 20px;
       pointer-events: none;
-      animation: floatBg 8s linear infinite;
-      font-size: 12px;
+      animation: chaosFloat 4s ease-out forwards;
+      z-index: 200;
     }
 
-    @keyframes floatBg {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      10% { opacity: 0.3; }
-      90% { opacity: 0.3; }
-      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    @keyframes chaosFloat {
+      0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-200px) scale(1.5) rotate(360deg); opacity: 0; }
     }
 
-    /* main container */
-    .container {
+    /* main heart container */
+    .heart-wrapper {
       position: relative;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
       z-index: 10;
     }
 
-    /* MASSIVE HEART */
-    .heart-container {
-      position: relative;
+    .crazy-heart {
+      font-size: 320px;
       cursor: pointer;
-      transition: all 0.3s;
+      filter: drop-shadow(0 0 30px #ff3366);
+      transition: all 0.05s;
+      animation: heartbeatCrazy 1s infinite;
     }
 
-    .big-heart {
-      font-size: 380px;
-      filter: drop-shadow(0 0 40px #ff3366);
-      transition: all 0.3s;
-      cursor: pointer;
-      animation: heartbeat 1.5s ease-in-out infinite;
-    }
-
-    @keyframes heartbeat {
+    @keyframes heartbeatCrazy {
       0%, 100% { transform: scale(1); text-shadow: 0 0 20px #ff3366; }
-      50% { transform: scale(1.05); text-shadow: 0 0 50px #ff66cc; }
+      50% { transform: scale(1.1); text-shadow: 0 0 60px #ff66ff; }
     }
 
-    /* lock overlay */
-    .lock-overlay {
-      position: absolute;
-      top: 50%;
+    /* tap counter - CRAZY */
+    .tap-counter {
+      position: fixed;
+      top: 20%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 80px;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 50%;
-      padding: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-      z-index: 20;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(20px);
+      padding: 20px 40px;
+      border-radius: 80px;
+      text-align: center;
+      z-index: 50;
       border: 3px solid #ff66cc;
-      animation: lockPulse 1s infinite;
+      white-space: nowrap;
     }
 
-    @keyframes lockPulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 20px #ff66cc; }
-      50% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 50px #ff44aa; }
+    .tap-number {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #ff88dd;
+      font-family: monospace;
+      text-shadow: 0 0 20px #ff44aa;
     }
 
-    /* unlock counter */
-    .unlock-counter {
+    .tap-label {
+      color: white;
+      font-size: 1rem;
+      letter-spacing: 2px;
+    }
+
+    /* progress bar - crazy style */
+    .crazy-progress {
       position: fixed;
       bottom: 25%;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(15px);
-      padding: 15px 30px;
-      border-radius: 80px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #ffccf0;
-      text-align: center;
-      z-index: 30;
-      border: 2px solid #ff66cc;
-      white-space: nowrap;
-      font-family: monospace;
-    }
-
-    .tap-count {
-      font-size: 2.5rem;
-      color: #ff88dd;
-      display: inline-block;
-      margin: 0 10px;
-    }
-
-    /* crazy activity panel */
-    .activity-panel {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
+      width: 80%;
       max-width: 400px;
-      background: rgba(0,0,0,0.95);
-      backdrop-filter: blur(20px);
-      border-radius: 40px;
-      padding: 25px;
-      text-align: center;
-      z-index: 200;
-      border: 3px solid #ff66cc;
-      transition: all 0.3s;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .activity-panel.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .activity-title {
-      font-size: 1.5rem;
-      color: #ff99ee;
-      margin-bottom: 20px;
-    }
-
-    .activity-content {
-      font-size: 1rem;
-      color: white;
-      margin: 20px 0;
-      line-height: 1.5;
-    }
-
-    .activity-button {
-      background: linear-gradient(135deg, #ff66cc, #ff44aa);
-      border: none;
-      padding: 12px 30px;
-      border-radius: 50px;
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 10px;
-      transition: 0.2s;
-    }
-
-    .activity-button:hover {
-      transform: scale(1.05);
-    }
-
-    .close-activity {
       background: rgba(255,255,255,0.2);
+      border-radius: 50px;
+      height: 12px;
+      overflow: hidden;
+      z-index: 50;
     }
 
-    /* crazy mini game styles */
-    .tap-game {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff66cc, #ff44aa, #ff88ff);
+      width: 0%;
+      transition: width 0.1s ease;
+      border-radius: 50px;
+      box-shadow: 0 0 20px #ff66cc;
     }
 
-    .tap-target {
-      background: #ff3366;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      cursor: pointer;
-      animation: shake 0.2s infinite;
-      transition: 0.05s;
+    /* floating messages (appear on each tap) */
+    .floating-message {
+      position: fixed;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ffe0fc;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 50px;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 150;
+      animation: messageFloat 2s ease-out forwards;
+      border: 1px solid #ff66cc;
     }
 
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
-    }
-
-    .timer {
-      font-size: 2rem;
-      font-family: monospace;
-      color: #ff99ee;
+    @keyframes messageFloat {
+      0% { transform: translateY(0) scale(0.8); opacity: 1; }
+      100% { transform: translateY(-120px) scale(1); opacity: 0; }
     }
 
     /* characters */
@@ -229,21 +147,32 @@
     }
 
     .char {
-      font-size: 70px;
+      font-size: 75px;
       filter: drop-shadow(0 0 15px #ff66aa);
       transition: all 0.5s;
     }
 
-    /* final poem */
-    .poem-overlay {
+    /* special effect zone */
+    .crazy-effect {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.96);
-      backdrop-filter: blur(20px);
-      z-index: 400;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* final explosion panel */
+    .final-explosion {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.98);
+      backdrop-filter: blur(30px);
+      z-index: 300;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -251,49 +180,62 @@
       opacity: 0;
       transition: opacity 1s ease;
       pointer-events: none;
-      padding: 30px;
-    }
-
-    .poem-content {
-      max-width: 500px;
       text-align: center;
-      color: #fff0fc;
-      font-family: 'Quicksand', serif;
+      padding: 20px;
     }
 
-    .poem-content h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #ff99cc, #ff66aa);
+    .final-poem {
+      max-width: 550px;
+      transform: scale(0.9);
+      transition: transform 0.5s;
+    }
+
+    .final-poem h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #ff99cc, #ff66aa, #ff44ff);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      margin-bottom: 20px;
     }
 
-    .poem-content p {
+    .final-poem p {
+      color: #fff0fc;
       font-size: 1.1rem;
       line-height: 1.8;
       margin: 15px 0;
       font-style: italic;
     }
 
-    .kiss-big {
-      margin-top: 30px;
-      font-size: 60px;
-      animation: kissPulse 1s infinite;
+    .kiss-final {
+      font-size: 70px;
+      margin: 20px;
+      animation: kissCrazy 0.8s infinite;
     }
 
-    @keyframes kissPulse {
+    @keyframes kissCrazy {
       0%, 100% { transform: scale(1); text-shadow: 0 0 10px #ff66aa; }
-      50% { transform: scale(1.2); text-shadow: 0 0 30px #ff44cc; }
+      50% { transform: scale(1.3) rotate(10deg); text-shadow: 0 0 40px #ff44cc; }
+    }
+
+    .reset-btn {
+      background: linear-gradient(135deg, #ff66cc, #ff44aa);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      color: white;
+      font-size: 1rem;
+      margin-top: 30px;
+      cursor: pointer;
+      transition: 0.2s;
     }
 
     .instruction {
       position: fixed;
-      top: 20px;
+      top: 15px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.7);
       backdrop-filter: blur(10px);
       padding: 8px 20px;
       border-radius: 50px;
@@ -301,367 +243,345 @@
       font-size: 0.8rem;
       white-space: nowrap;
       z-index: 40;
-      pointer-events: none;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     @media (max-width: 550px) {
-      .big-heart { font-size: 280px; }
-      .lock-overlay { font-size: 60px; padding: 15px; }
-      .unlock-counter { font-size: 1rem; padding: 10px 20px; bottom: 20%; }
-      .tap-count { font-size: 1.8rem; }
+      .crazy-heart { font-size: 250px; }
+      .tap-number { font-size: 2.5rem; }
+      .tap-counter { padding: 12px 25px; top: 15%; }
       .char { font-size: 55px; }
+      .final-poem p { font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="instruction">🔒 RYOKO... UNLOCK AHMAD'S HEART 🔒</div>
-<div class="unlock-counter" id="unlockCounter">
-  🔓 TAP THE LOCK 🔓<br>
-  <span class="tap-count" id="tapCount">0</span> / <span id="requiredTaps">50</span>
+<div class="instruction">🔥 RYOKO... TOCA MI CORAZÓN COMO LOCA 🔥 CADA TAP = UN SECRETO 💜</div>
+
+<div class="tap-counter">
+  <div class="tap-number" id="tapCountDisplay">0</div>
+  <div class="tap-label">💜 TAPS EN MI CORAZÓN 💜</div>
 </div>
 
-<div class="container">
-  <div class="heart-container">
-    <div class="big-heart">❤️</div>
-    <div class="lock-overlay" id="lockIcon">🔒💜</div>
-  </div>
+<div class="crazy-progress">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<div class="heart-wrapper">
+  <div class="crazy-heart" id="crazyHeart">❤️</div>
 </div>
 
 <div class="characters">
-  <div class="char" id="ahmad-char">🧑‍🦱💜</div>
-  <div class="char" id="ryoko-char">👩🌸</div>
+  <div class="char" id="ahmadChar">🧑‍🦱💜</div>
+  <div class="char" id="ryokoChar">👩🌸</div>
 </div>
 
-<!-- Activity Panel (crazy mini games) -->
-<div class="activity-panel" id="activityPanel">
-  <div class="activity-title" id="activityTitle">🎉 CRAZY ACTIVITY 🎉</div>
-  <div class="activity-content" id="activityContent"></div>
-  <button class="activity-button" id="activityActionBtn">🔥 DO IT 🔥</button>
-  <button class="activity-button close-activity" id="closeActivityBtn">😈 SKIP (but why?) 😈</button>
-</div>
+<div class="crazy-effect" id="crazyEffect"></div>
 
-<!-- Final Poem -->
-<div class="poem-overlay" id="poemOverlay">
-  <div class="poem-content">
-    <h1>💜 PARA RYOKO 💜</h1>
-    <p>Tocaste mi corazón, lo desbloqueaste todo.<br>No cualquiera puede hacer eso.</p>
-    <p>Eres mi locura favorita,<br>mi razón para sonreír cuando el mundo pesa.</p>
-    <p>Ryoko, cada latido dice tu nombre.<br>Y ahora que tienes la llave...<br>nunca la devuelvas. 💜</p>
-    <p><strong>Te amo, Ryoko. Eres mi hogar.</strong></p>
-    <div class="kiss-big" id="finalKiss">💋 AHMAD → RYOKO 💋</div>
-    <button class="activity-button" id="restartBtn" style="margin-top: 20px;">🌸 Volver a empezar 🌸</button>
+<div class="final-explosion" id="finalExplosion">
+  <div class="final-poem">
+    <h1>💜 RYOKO... LO LOGRASTE 💜</h1>
+    <p>Tocaste mi corazón tantas veces que ahora late SOLO por ti.</p>
+    <p>Cada tap fue un "te amo" que no sabía cómo decir.<br>Cada secreto fue una parte de mí que ahora es tuya.</p>
+    <p>Ryoko, no hay locura más hermosa que amarte.<br>No hay caos más perfecto que tu risa en mi vida.</p>
+    <p><strong>Eres mi corazón, mi caos, mi calma y mi locura favorita.</strong></p>
+    <p><strong>Te amo, Ryoko. Ahmad siempre será tuyo. 💜</strong></p>
+    <div class="kiss-final" id="finalKissAnimate">💋 AHMAD → RYOKO 💋</div>
+    <button class="reset-btn" id="resetBtn">🌸 VOLVER A TOCAR 🌸</button>
   </div>
 </div>
 
 <script>
-  // ========== CRAZY ACTIVITIES ==========
-  let currentActivity = null;
-  let activityCompleted = false;
-  let unlockTaps = 0;
-  const REQUIRED_TAPS = 50;
-  let heartUnlocked = false;
-
-  const activities = [
-    {
-      name: "💥 CRAZY TAP ATTACK 💥",
-      description: "Toca el corazón rojo 20 veces lo más rápido que puedas! 🔥",
-      type: "tap",
-      target: 20,
-      action: (container, complete) => {
-        let count = 0;
-        container.innerHTML = `
-          <div class="tap-game">
-            <div class="tap-target" id="crazyTarget">❤️</div>
-            <div class="timer">Taps: <span id="tapProgress">0</span> / 20</div>
-          </div>
-        `;
-        const target = document.getElementById('crazyTarget');
-        const progress = document.getElementById('tapProgress');
-        target.addEventListener('click', () => {
-          count++;
-          progress.innerText = count;
-          target.style.transform = 'scale(0.9)';
-          setTimeout(() => { target.style.transform = 'scale(1)'; }, 50);
-          if (navigator.vibrate) navigator.vibrate(30);
-          if (count >= 20) {
-            complete(true);
-          }
-        });
-      }
-    },
-    {
-      name: "🎤 SCREAM RYOKO'S NAME 🎤",
-      description: "Grita 'RYOKO TE AMO' bien fuerte! (el micrófono te escucha... tal vez 😈)",
-      type: "mock",
-      action: (container, complete) => {
-        container.innerHTML = `<p style="font-size: 1.2rem;">🎙️ ¿Lista? Grita: <strong>"RYOKO AMA A AHMAD"</strong> 🎙️</p><p>⬇️ Toca cuando hayas gritado ⬇️</p>`;
-        const btn = document.createElement('button');
-        btn.innerText = '✅ ¡GRITÉ! ✅';
-        btn.className = 'activity-button';
-        btn.onclick = () => complete(true);
-        container.appendChild(btn);
-      }
-    },
-    {
-      name: "💃 BAILA LOCO 💃",
-      description: "Levántate y baila 10 segundos como si nadie te viera! Ryoko, hazlo por Ahmad 💜",
-      type: "mock",
-      action: (container, complete) => {
-        let seconds = 10;
-        container.innerHTML = `<p>💃 BAILA 💃</p><div class="timer" id="danceTimer">${seconds}s</div><p>¡Muévete!</p>`;
-        const timer = setInterval(() => {
-          seconds--;
-          const timerDiv = document.getElementById('danceTimer');
-          if (timerDiv) timerDiv.innerText = `${seconds}s`;
-          if (seconds <= 0) {
-            clearInterval(timer);
-            complete(true);
-          }
-        }, 1000);
-      }
-    },
-    {
-      name: "😘 BESO VIRTUAL 😘",
-      description: "Manda un beso a la pantalla! Toca la pantalla y di 'MUAH' 💋",
-      type: "mock",
-      action: (container, complete) => {
-        container.innerHTML = `<p>💋 Prepara tus labios... 💋</p><p>Toca en cualquier lugar para enviar tu beso a Ahmad!</p>`;
-        const kissHandler = () => {
-          complete(true);
-          document.removeEventListener('click', kissHandler);
-        };
-        document.addEventListener('click', kissHandler);
-        setTimeout(() => {
-          document.removeEventListener('click', kissHandler);
-        }, 10000);
-      }
-    },
-    {
-      name: "📸 SELFIE ROMÁNTICA 📸",
-      description: "Haz una selfie sonriendo y muéstrala a la cámara (o solo sonríe bien bonito)",
-      type: "mock",
-      action: (container, complete) => {
-        container.innerHTML = `<p>📸 Sonríe para Ahmad... 1, 2, 3... ¡Click!</p><button class="activity-button" id="selfieBtn">✅ ¡LISTO! ✅</button>`;
-        document.getElementById('selfieBtn')?.addEventListener('click', () => complete(true));
-      }
-    }
+  // ========== CRAZY ROMANTIC SECRETS (100+ possible messages) ==========
+  const secretMessages = [
+    "💜 TOCASTE MI CORAZÓN... ahora es tuyo",
+    "🌸 Ryoko, cada latido tiene tu nombre",
+    "💋 Quiero besarte hasta que el sol se canse",
+    "🔥 Eres mi incendio favorito",
+    "🌙 Cuando duermo, sueño contigo",
+    "⭐ Eres más brillante que todas las estrellas",
+    "💕 Mi día mejora solo porque existes",
+    "😘 Un beso virtual para ti, Ryoko",
+    "🎵 Tu risa es mi canción favorita",
+    "💜 TE AMO (otra vez, y otra vez, y otra vez)",
+    "🌸 Eres mi lugar seguro",
+    "🔥 Tocar mi corazón te acerca más a mí",
+    "💋 Tus labios son mi obsesión",
+    "🌙 Eres mi luna en la noche más oscura",
+    "⭐ Contigo el caos tiene sentido",
+    "💕 Ahmad está loco... loco por ti",
+    "😘 Otro beso porque sí",
+    "🎵 Bailaría contigo bajo la lluvia",
+    "💜 Este corazón late RYOKO RYOKO RYOKO",
+    "🌸 Eres mi sueño hecho realidad",
+    "🔥 No pares... quiero que sepas todo lo que siento",
+    "💋 Cada tap es un 'te amo' silencioso",
+    "🌙 Eres mi buena noche y mi buen día",
+    "⭐ La persona más hermosa del mundo se llama Ryoko",
+    "💕 Me haces mejor persona",
+    "😘 BESO BESO BESO",
+    "🎵 Nuestra canción suena en mi cabeza 24/7",
+    "💜 Ryoko, Ryoko, Ryoko... suena bonito",
+    "🌸 Tú + Yo = Destino",
+    "🔥 Me derrites con solo mirarme",
+    "💋 Quiero envejecer contigo",
+    "🌙 Eres mi sueño más bonito",
+    "⭐ Te elijo hoy, mañana y siempre",
+    "💕 Mi corazón es tuyo... tómalo",
+    "😘 Un beso en la frente",
+    "🎵 Eres la melodía de mi vida",
+    "💜 TE AMO EN MAYÚSCULAS",
+    "🌸 Eres mi primavera favorita",
+    "🔥 Cada tap es una promesa de amarte",
+    "💋 Este corazón es un museo... y tú eres la única obra"
   ];
 
-  let currentActivityIndex = 0;
+  let tapCount = 0;
+  const TARGET_TAPS = 50;
+  let finaleTriggered = false;
 
-  function showNextActivity() {
-    if (currentActivityIndex >= activities.length) {
-      // all activities done - unlock heart!
-      completeHeartUnlock();
-      return;
-    }
+  const heart = document.getElementById('crazyHeart');
+  const tapDisplay = document.getElementById('tapCountDisplay');
+  const progressFill = document.getElementById('progressFill');
+  const ahmadChar = document.getElementById('ahmadChar');
+  const ryokoChar = document.getElementById('ryokoChar');
+  const finalExplosion = document.getElementById('finalExplosion');
+  const crazyEffect = document.getElementById('crazyEffect');
+
+  // update UI
+  function updateUI() {
+    tapDisplay.innerText = tapCount;
+    const percent = (tapCount / TARGET_TAPS) * 100;
+    progressFill.style.width = percent + '%';
     
-    activityCompleted = false;
-    const activity = activities[currentActivityIndex];
-    document.getElementById('activityTitle').innerText = activity.name;
-    const contentDiv = document.getElementById('activityContent');
-    
-    activity.action(contentDiv, (success) => {
-      if (success && !activityCompleted) {
-        activityCompleted = true;
-        showMessage(`🎉 Actividad superada! +${Math.floor(REQUIRED_TAPS / activities.length)} taps desbloqueados! 🎉`, false);
-        unlockTaps += Math.floor(REQUIRED_TAPS / activities.length);
-        if (unlockTaps > REQUIRED_TAPS) unlockTaps = REQUIRED_TAPS;
-        updateTapDisplay();
-        
-        if (unlockTaps >= REQUIRED_TAPS) {
-          document.getElementById('activityPanel').classList.remove('show');
-          completeHeartUnlock();
-        } else {
-          currentActivityIndex++;
-          document.getElementById('activityPanel').classList.remove('show');
-          // show next after short delay
-          setTimeout(() => {
-            if (unlockTaps < REQUIRED_TAPS && !heartUnlocked) {
-              document.getElementById('activityPanel').classList.add('show');
-              showNextActivity();
-            }
-          }, 800);
-        }
-      }
-    });
-  }
-
-  function showMessage(text, isSecret = true) {
-    let msgDiv = document.getElementById('tempMsg');
-    if (!msgDiv) {
-      msgDiv = document.createElement('div');
-      msgDiv.id = 'tempMsg';
-      msgDiv.style.position = 'fixed';
-      msgDiv.style.bottom = '30%';
-      msgDiv.style.left = '50%';
-      msgDiv.style.transform = 'translateX(-50%)';
-      msgDiv.style.background = 'rgba(0,0,0,0.9)';
-      msgDiv.style.backdropFilter = 'blur(15px)';
-      msgDiv.style.padding = '12px 24px';
-      msgDiv.style.borderRadius = '50px';
-      msgDiv.style.color = '#ffccf0';
-      msgDiv.style.zIndex = '300';
-      msgDiv.style.border = '1px solid #ff66cc';
-      msgDiv.style.fontSize = '0.9rem';
-      msgDiv.style.textAlign = 'center';
-      msgDiv.style.pointerEvents = 'none';
-      document.body.appendChild(msgDiv);
-    }
-    msgDiv.innerText = text;
-    msgDiv.style.opacity = '1';
-    setTimeout(() => {
-      msgDiv.style.opacity = '0';
-    }, 3000);
-  }
-
-  // Tap to unlock the lock!
-  const lockIcon = document.getElementById('lockIcon');
-  const tapCountSpan = document.getElementById('tapCount');
-  const requiredSpan = document.getElementById('requiredTaps');
-  requiredSpan.innerText = REQUIRED_TAPS;
-
-  function updateTapDisplay() {
-    tapCountSpan.innerText = unlockTaps;
-    if (unlockTaps >= REQUIRED_TAPS) {
-      document.getElementById('unlockCounter').innerHTML = '🔓 ¡CORAZÓN DESBLOQUEADO! 🔓<br>💜 AHORA VEN A POR MÍ 💜';
+    if (tapCount >= TARGET_TAPS && !finaleTriggered) {
+      startCrazyFinale();
     }
   }
 
-  lockIcon.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (heartUnlocked) return;
-    
-    unlockTaps++;
-    updateTapDisplay();
-    
-    // burst effect
-    const rect = lockIcon.getBoundingClientRect();
-    burstHearts(rect.left + rect.width/2, rect.top + rect.height/2);
-    if (navigator.vibrate) navigator.vibrate(20);
-    
-    if (unlockTaps >= REQUIRED_TAPS && !heartUnlocked) {
-      // heart unlocked! start activities
-      heartUnlocked = true;
-      lockIcon.style.display = 'none';
-      document.querySelector('.big-heart').style.animation = 'heartbeat 0.8s infinite';
-      showMessage('💜 ¡DESBLOQUEASTE MI CORAZÓN! 💜 Ahora haz las actividades para ganar el premio final...', false);
-      
+  // create floating message on tap
+  function showFloatingMessage(x, y) {
+    const randomMsg = secretMessages[Math.floor(Math.random() * secretMessages.length)];
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'floating-message';
+    msgDiv.innerText = randomMsg;
+    msgDiv.style.left = (x - 60) + 'px';
+    msgDiv.style.top = (y - 40) + 'px';
+    document.body.appendChild(msgDiv);
+    setTimeout(() => msgDiv.remove(), 2000);
+  }
+
+  // chaos particles on tap
+  function createChaosParticles(x, y) {
+    for (let i = 0; i < 12; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'chaos-particle';
+      const icons = ['💜', '💋', '🔥', '🌸', '⭐', '💕', '😘', '✨'];
+      particle.innerText = icons[Math.floor(Math.random() * icons.length)];
+      particle.style.left = (x - 20 + Math.random() * 40) + 'px';
+      particle.style.top = (y - 20 + Math.random() * 40) + 'px';
+      particle.style.fontSize = (18 + Math.random() * 25) + 'px';
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 2500);
+    }
+  }
+
+  // screen shake effect (crazy!)
+  function shakeScreen() {
+    document.body.style.transform = 'translate(2px, 1px)';
+    setTimeout(() => { document.body.style.transform = 'translate(-1px, -2px)'; }, 30);
+    setTimeout(() => { document.body.style.transform = 'translate(1px, -1px)'; }, 60);
+    setTimeout(() => { document.body.style.transform = 'translate(0, 0)'; }, 90);
+  }
+
+  // burst hearts from center
+  function burstHeartsFromHeart() {
+    const heartRect = heart.getBoundingClientRect();
+    const centerX = heartRect.left + heartRect.width / 2;
+    const centerY = heartRect.top + heartRect.height / 2;
+    for (let i = 0; i < 20; i++) {
       setTimeout(() => {
-        document.getElementById('activityPanel').classList.add('show');
-        showNextActivity();
-      }, 1500);
+        const heartParticle = document.createElement('div');
+        heartParticle.className = 'chaos-particle';
+        heartParticle.innerText = '💜';
+        heartParticle.style.left = centerX + 'px';
+        heartParticle.style.top = centerY + 'px';
+        heartParticle.style.position = 'fixed';
+        heartParticle.style.fontSize = '30px';
+        heartParticle.style.animation = `chaosFloat ${1 + Math.random() * 1.5}s ease-out forwards`;
+        document.body.appendChild(heartParticle);
+        setTimeout(() => heartParticle.remove(), 2000);
+      }, i * 30);
+    }
+  }
+
+  // handle tap on heart
+  heart.addEventListener('click', (e) => {
+    if (finaleTriggered) return;
+    
+    e.stopPropagation();
+    const rect = heart.getBoundingClientRect();
+    const clickX = e.clientX;
+    const clickY = e.clientY;
+    
+    tapCount++;
+    updateUI();
+    
+    // show message at click position
+    showFloatingMessage(clickX, clickY);
+    createChaosParticles(clickX, clickY);
+    shakeScreen();
+    
+    // change heart scale briefly
+    heart.style.transform = 'scale(0.95)';
+    setTimeout(() => { heart.style.transform = 'scale(1)'; }, 80);
+    
+    if (navigator.vibrate) navigator.vibrate(30);
+    
+    // special effect on every 10 taps
+    if (tapCount % 10 === 0 && tapCount < TARGET_TAPS) {
+      burstHeartsFromHeart();
+      const bigMsg = document.createElement('div');
+      bigMsg.className = 'floating-message';
+      bigMsg.innerText = `🔥 ${tapCount} TAPS! SIGUE ASÍ RYOKO 🔥`;
+      bigMsg.style.left = '50%';
+      bigMsg.style.top = '40%';
+      bigMsg.style.transform = 'translateX(-50%)';
+      bigMsg.style.fontSize = '1.3rem';
+      bigMsg.style.whiteSpace = 'nowrap';
+      document.body.appendChild(bigMsg);
+      setTimeout(() => bigMsg.remove(), 1500);
+    }
+    
+    // when close to target
+    if (tapCount === TARGET_TAPS - 5) {
+      showSpecialMessage("🔥 5 TAPS MÁS Y MI CORAZÓN EXPLOTA DE AMOR 🔥");
     }
   });
 
-  function completeHeartUnlock() {
-    if (window.finaleStarted) return;
-    window.finaleStarted = true;
+  function showSpecialMessage(msg) {
+    const special = document.createElement('div');
+    special.className = 'floating-message';
+    special.innerText = msg;
+    special.style.left = '50%';
+    special.style.top = '50%';
+    special.style.transform = 'translateX(-50%)';
+    special.style.fontSize = '1.2rem';
+    special.style.background = 'rgba(255,50,100,0.9)';
+    special.style.whiteSpace = 'normal';
+    special.style.maxWidth = '80vw';
+    special.style.textAlign = 'center';
+    document.body.appendChild(special);
+    setTimeout(() => special.remove(), 2500);
+  }
+
+  // CRAZY FINALE
+  function startCrazyFinale() {
+    finaleTriggered = true;
     
-    document.getElementById('activityPanel').classList.remove('show');
-    showMessage('💜 ¡COMPLETASTE TODO! 💜 Ahora... el momento final...', false);
+    // massive explosion of hearts
+    for (let i = 0; i < 100; i++) {
+      setTimeout(() => {
+        const explosionHeart = document.createElement('div');
+        explosionHeart.className = 'chaos-particle';
+        explosionHeart.innerText = ['💜', '💋', '🔥', '🌸', '⭐', '💕'][Math.floor(Math.random() * 6)];
+        explosionHeart.style.left = Math.random() * 100 + '%';
+        explosionHeart.style.top = Math.random() * 100 + '%';
+        explosionHeart.style.fontSize = (25 + Math.random() * 40) + 'px';
+        explosionHeart.style.animation = `chaosFloat ${2 + Math.random() * 2}s ease-out forwards`;
+        document.body.appendChild(explosionHeart);
+        setTimeout(() => explosionHeart.remove(), 2500);
+      }, i * 20);
+    }
     
-    // animate characters kissing
-    const ahmad = document.getElementById('ahmad-char');
-    const ryoko = document.getElementById('ryoko-char');
-    ahmad.style.transition = 'all 1.5s';
-    ryoko.style.transition = 'all 1.5s';
-    ahmad.style.transform = 'translateX(calc(50vw - 100px))';
-    ryoko.style.transform = 'translateX(calc(-50vw + 100px))';
+    // animate characters to center
+    ahmadChar.style.transition = 'all 1.5s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
+    ryokoChar.style.transition = 'all 1.5s cubic-bezier(0.2, 0.9, 0.4, 1.2)';
+    ahmadChar.style.transform = 'translateX(calc(50vw - 100px))';
+    ryokoChar.style.transform = 'translateX(calc(-50vw + 100px))';
+    
+    // change heart to glowing
+    heart.style.animation = 'none';
+    heart.style.filter = 'drop-shadow(0 0 80px #ff44ff)';
     
     setTimeout(() => {
-      ahmad.innerHTML = '😘💜';
-      ryoko.innerHTML = '😘🌸';
-      const kissEffect = document.createElement('div');
-      kissEffect.innerHTML = '💋💜💋';
-      kissEffect.style.position = 'fixed';
-      kissEffect.style.top = '60%';
-      kissEffect.style.left = '50%';
-      kissEffect.style.transform = 'translate(-50%, -50%)';
-      kissEffect.style.fontSize = '80px';
-      kissEffect.style.zIndex = '250';
-      kissEffect.style.animation = 'kissPulse 1s ease-in-out 3';
-      document.body.appendChild(kissEffect);
-      if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
-      setTimeout(() => kissEffect.remove(), 2000);
+      // kiss!
+      ahmadChar.innerHTML = '😘💜 AHMAD';
+      ryokoChar.innerHTML = '😘🌸 RYOKO';
+      
+      const kissOverlay = document.createElement('div');
+      kissOverlay.innerHTML = '💋💜💋💜💋';
+      kissOverlay.style.position = 'fixed';
+      kissOverlay.style.top = '55%';
+      kissOverlay.style.left = '50%';
+      kissOverlay.style.transform = 'translate(-50%, -50%)';
+      kissOverlay.style.fontSize = '70px';
+      kissOverlay.style.zIndex = '250';
+      kissOverlay.style.animation = 'kissCrazy 0.5s infinite';
+      kissOverlay.style.pointerEvents = 'none';
+      document.body.appendChild(kissOverlay);
+      
+      if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 300]);
       
       setTimeout(() => {
-        const poem = document.getElementById('poemOverlay');
-        poem.style.opacity = '1';
-        poem.style.pointerEvents = 'auto';
-      }, 800);
+        kissOverlay.remove();
+        // show final poem
+        finalExplosion.style.opacity = '1';
+        finalExplosion.style.pointerEvents = 'auto';
+        
+        // animate final kiss in poem
+        const finalKiss = document.getElementById('finalKissAnimate');
+        setInterval(() => {
+          if (finalExplosion.style.opacity === '1') {
+            finalKiss.style.transform = 'scale(1.2)';
+            setTimeout(() => { finalKiss.style.transform = 'scale(1)'; }, 500);
+          }
+        }, 1000);
+      }, 2000);
     }, 1500);
   }
 
-  function burstHearts(x, y) {
-    for (let i = 0; i < 15; i++) {
-      let heart = document.createElement('div');
-      heart.innerHTML = ['💜', '💖', '💗', '🔥', '💋'][Math.floor(Math.random() * 5)];
-      heart.style.position = 'fixed';
-      heart.style.left = (x - 30 + Math.random() * 60) + 'px';
-      heart.style.top = (y - 30 + Math.random() * 60) + 'px';
-      heart.style.fontSize = (16 + Math.random() * 24) + 'px';
-      heart.style.pointerEvents = 'none';
-      heart.style.zIndex = '100';
-      heart.style.animation = 'floatUp 2s ease-out forwards';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 2000);
-    }
-  }
-
-  const floatStyle = document.createElement('style');
-  floatStyle.textContent = `
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(0.5); opacity: 1; }
-      100% { transform: translateY(-150px) scale(1.3); opacity: 0; }
-    }
-  `;
-  document.head.appendChild(floatStyle);
-
-  document.getElementById('closeActivityBtn').addEventListener('click', () => {
-    document.getElementById('activityPanel').classList.remove('show');
-    showMessage('😈 ¡No puedes escapar! Toca el candado otra vez 😈', false);
-  });
-
-  document.getElementById('restartBtn')?.addEventListener('click', () => {
+  // reset button
+  document.getElementById('resetBtn').addEventListener('click', () => {
     location.reload();
   });
 
-  // create background particles
-  for (let i = 0; i < 60; i++) {
-    let particle = document.createElement('div');
-    particle.className = 'bg-particle';
-    particle.innerHTML = ['💜', '🌸', '💕', '✨', '🦋', '🔥'][Math.floor(Math.random() * 6)];
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.fontSize = (10 + Math.random() * 25) + 'px';
-    particle.style.animationDuration = (4 + Math.random() * 10) + 's';
-    particle.style.animationDelay = Math.random() * 5 + 's';
-    document.body.appendChild(particle);
-  }
+  // initial message
+  setTimeout(() => {
+    if (!finaleTriggered) {
+      showSpecialMessage("💜 TOCA EL CORAZÓN, RYOKO... CADA TAP ES UN SECRETO DE AMOR 💜");
+    }
+  }, 1000);
 
-  // sparkles
-  for (let i = 0; i < 40; i++) {
+  // create background sparkles
+  for (let i = 0; i < 80; i++) {
     let spark = document.createElement('div');
     spark.style.position = 'absolute';
-    spark.style.width = '4px';
-    spark.style.height = '4px';
+    spark.style.width = '3px';
+    spark.style.height = '3px';
     spark.style.background = '#ff99ee';
     spark.style.borderRadius = '50%';
     spark.style.left = Math.random() * 100 + '%';
     spark.style.top = Math.random() * 100 + '%';
-    spark.style.animation = `twinkle ${1 + Math.random() * 2}s infinite`;
+    spark.style.animation = `twinkle ${0.8 + Math.random() * 2}s infinite`;
+    spark.style.pointerEvents = 'none';
     document.body.appendChild(spark);
   }
 
-  const twinkleStyle = document.createElement('style');
-  twinkleStyle.textContent = `
+  const style = document.createElement('style');
+  style.textContent = `
     @keyframes twinkle {
       0%, 100% { opacity: 0; transform: scale(0.5); }
       50% { opacity: 1; transform: scale(1.5); box-shadow: 0 0 10px #ff66cc; }
     }
   `;
-  document.head.appendChild(twinkleStyle);
+  document.head.appendChild(style);
 </script>
 </body>
 </html>
